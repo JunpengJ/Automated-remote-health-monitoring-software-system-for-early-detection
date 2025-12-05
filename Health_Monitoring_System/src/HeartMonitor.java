@@ -3,7 +3,7 @@ public class HeartMonitor extends HealthDecorator{
 
     public HeartMonitor(PatientData patientData){
         super(patientData);
-        this.heartRate = 90;
+        this.heartRate = 72;
     }
 
     public HeartMonitor(PatientData patientData, int initialHeartRate){

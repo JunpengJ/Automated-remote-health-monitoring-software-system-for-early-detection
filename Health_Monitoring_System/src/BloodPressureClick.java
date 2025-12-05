@@ -55,8 +55,15 @@ public class BloodPressureClick extends HealthDecorator{
         return String.format("Blood Pressure: %d/%d mmHg (%s)", systolic, diastolic, status);
     }
 
-    public void display(){
-        System.out.println("Blood Pressure Monitor: ");
-        System.out.println(" " + getMeasurement());
+    public void display() {
+        if (systolic >= 140 || diastolic >= 90) {
+            System.out.println("  Suggestion: Please seek medical attention immediately, medication may be required for treatment");
+        } else if (systolic >= 130 || diastolic >= 85) {
+            System.out.println("  Suggestion: Pay attention to your diet, reduce salt intake, and increase physical activity");
+        } else if (systolic < 90 || diastolic < 60) {
+            System.out.println("  Suggestion: Properly increase the intake of salt and water");
+        } else {
+            System.out.println("  Suggestion: Maintain good living habits");
+        }
     }
 }

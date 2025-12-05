@@ -1,15 +1,42 @@
-//TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
-// 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
+
 public class HealthMonitoringSystemTestDrive {
     public static void main(String[] args) {
-        //TIP 当文本光标位于高亮显示的文本处时按 <shortcut actionId="ShowIntentionActions"/>
-        // 查看 IntelliJ IDEA 建议如何修正。
-        System.out.printf("Hello and welcome!");
+        System.out.println("=== Health Monitoring System ===");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP 按 <shortcut actionId="Debug"/> 开始调试代码。我们已经设置了一个 <icon src="AllIcons.Debugger.Db_set_breakpoint"/> 断点
-            // 但您始终可以通过按 <shortcut actionId="ToggleLineBreakpoint"/> 添加更多断点。
-            System.out.println("i = " + i);
-        }
+        PatientData patient = new PatientData(120, 80, "John Doe", "O+");
+
+        CurrentHealthDisplay display = new CurrentHealthDisplay(patient);
+
+        HeartMonitor heartMonitor = new HeartMonitor(patient, 75);
+        BloodPressureClick bloodPressureMonitor = new BloodPressureClick(patient, 120, 80);
+
+        display.addHealthDecorator(heartMonitor);
+        display.addHealthDecorator(bloodPressureMonitor);
+
+        System.out.println("\nInitial State:");
+        display.display();
+
+        System.out.println("\n1. Updating patient blood pressure...");
+        patient.setBloodPressure(150, 95);
+
+        System.out.println("\n2. Updating heart rate...");
+        heartMonitor.setHeartRate(110);
+
+        System.out.println("\n3. Updating blood pressure monitor...");
+        bloodPressureMonitor.setBloodPressure(145, 92);
+
+        System.out.println("\n4. Updating patient name...");
+        patient.setName("Jane Smith");
+
+        System.out.println("\n5. Removing heart monitor...");
+        display.removeHealthDecorator(heartMonitor);
+
+        System.out.println("\n6. Final update - changing blood pressure...");
+        patient.setBloodPressure(130, 85);
+
+        System.out.println("\nFinal State:");
+        display.display();
+
+        System.out.println("\n=== System Test Complete ===");
     }
 }
